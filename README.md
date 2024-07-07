@@ -16,11 +16,11 @@
 =======
 
 # .ENV
-MONGO_URL=your_mongo_url
-JWT_SECRET=secret
-BRAINTREE_MERCHANT_ID=your_braintree_id
-BRAINTREE_PUBLIC_KEY=your_braintree_public_key
-BRAINTREE_PRIVATE_KEY=your_braintree_private_key
-NODE_ENV_CUSTOM=devolopment/production
+MONGO_URL=your_mongo_url<br/>
+JWT_SECRET=secret<br/>
+BRAINTREE_MERCHANT_ID=your_braintree_id<br/>
+BRAINTREE_PUBLIC_KEY=your_braintree_public_key<br/>
+BRAINTREE_PRIVATE_KEY=your_braintree_private_key<br/>
+NODE_ENV_CUSTOM=devolopment/production<br/>
 SERVER_URL=your_server_url
 >>>>>>> 2c963e8 (Update README.md)
