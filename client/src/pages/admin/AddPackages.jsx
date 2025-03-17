@@ -102,10 +102,10 @@ const AddPackages = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.packageImages.length === 0) {
-      alert("You must upload atleast 1 image");
-      return;
-    }
+    // if (formData.packageImages.length === 0) {
+    //   alert("You must upload atleast 1 image");
+    //   return;
+    // }
     if (
       formData.packageName === "" ||
       formData.packageDescription === "" ||

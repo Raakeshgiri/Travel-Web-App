@@ -59,8 +59,8 @@ const AllBookings = () => {
   };
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-[95%] shadow-xl rounded-lg p-3 px-1 flex flex-col gap-2">
+    <div className="w-full flex justify-center ">
+      <div className="w-[95%] shadow-xl border rounded-lg p-3 px-1 flex flex-col gap-2">
         {loading && <h1 className="text-center text-2xl">Loading...</h1>}
         {error && <h1 className="text-center text-2xl">{error}</h1>}
         <div className="w-full border-b-4 p-3">

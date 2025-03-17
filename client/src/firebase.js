@@ -6,12 +6,12 @@ import { initializeApp } from "firebase/app";
 // Your web app's Firebase configuration
 //temporary souls firebase
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "mern-travel-tourism.firebaseapp.com",
-  projectId: "mern-travel-tourism",
-  storageBucket: "mern-travel-tourism.appspot.com",
-  messagingSenderId: "304378877141",
-  appId: "1:304378877141:web:3bddab2778ca23186f7e5c",
+  apiKey: "AIzaSyCse7_3vMsxHhcu4qdbn_Ax-TJJZ0VY9ZM",
+  authDomain: "travel-1e72d.firebaseapp.com",
+  projectId: "travel-1e72d",
+  storageBucket: "travel-1e72d.firebasestorage.app",
+  messagingSenderId: "245418750009",
+  appId: "1:245418750009:web:1b992ca08135728475dde8"
 };
 
 // Initialize Firebase

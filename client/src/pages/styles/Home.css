@@ -6,7 +6,7 @@
     background-size: cover;
     /* background-position: 0px 0px; */
     filter: brightness(0.7);
-    height: 340px;
+    height: 100vh;
 }
 .top-part{
     position: absolute;

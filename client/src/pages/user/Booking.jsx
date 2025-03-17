@@ -88,40 +88,84 @@ const Booking = () => {
   }, [currentUser]);
 
   //handle payment & book package
+  const loadRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+  
   const handleBookPackage = async () => {
-    if (
-      bookingData.packageDetails === "" ||
-      bookingData.buyer === "" ||
-      bookingData.totalPrice <= 0 ||
-      bookingData.persons <= 0 ||
-      bookingData.date === ""
-    ) {
-      alert("All fields are required!");
+    if (!bookingData.date) {
+      alert("Please select a date.");
       return;
     }
+  
     try {
       setLoading(true);
-      const res = await fetch(`/api/booking/book-package/${params?.id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      });
-      const data = await res.json();
-      if (data?.success) {
+  
+      // Load Razorpay script before proceeding
+      const loaded = await loadRazorpay();
+      if (!loaded) {
+        alert("Razorpay SDK failed to load. Are you online?");
         setLoading(false);
-        alert(data?.message);
-        navigate(`/profile/${currentUser?.user_role === 1 ? "admin" : "user"}`);
-      } else {
-        setLoading(false);
-        alert(data?.message);
+        return;
       }
+  
+      // Create an order on the backend
+      const { data } = await axios.post("/api/booking/create-order", {
+        amount: bookingData.totalPrice * 100, // Amount in paise
+        currency: "INR",
+      });
+  
+      const options = {
+        key: process.env.RAZORPAY_KEY, // Replace with your Razorpay Key
+        amount: data.amount,
+        currency: "INR",
+        name: "Travellers",
+        description: "Package Booking",
+        order_id: data.order_id, // This comes from Razorpay Order API
+        handler: async function (response) {
+          // Verify payment on backend
+          const verifyRes = await axios.post("/api/booking/verify-payment", {
+            order_id: data.order_id,
+            payment_id: response.razorpay_payment_id,
+            signature: response.razorpay_signature,
+          });
+  
+          // if (verifyRes.data.success) {
+            // Save booking details in DB
+            await axios.post(`/api/booking/book-package/${params?.packageId}`, bookingData);
+            alert("Booking successful!");
+            navigate(`/profile/${currentUser?.user_role === 1 ? "admin" : "user"}`);
+          // } 
+          // else {
+          //   alert("Payment verification failed.");
+          // }
+        },
+        prefill: {
+          name: currentUser.username,
+          email: currentUser.email,
+          contact: currentUser.phone,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+  
+      const razor = new window.Razorpay(options);
+      razor.open();
+  
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     if (params?.packageId) {
@@ -332,7 +376,7 @@ const Booking = () => {
                     : packageData.packagePrice * bookingData.persons}
                 </span>
               </p>
-              <div className="my-2 max-w-[300px] gap-1">
+              {/* <div className="my-2 max-w-[300px] gap-1">
                 <p
                   className={`font-semibold ${
                     instance && "text-red-700 text-sm"
@@ -363,7 +407,14 @@ const Booking = () => {
                     </button>
                   </>
                 )}
-              </div>
+              </div> */}
+              <button
+              className="p-2 rounded bg-blue-600 text-white hover:opacity-95 cursor-pointer"
+              onClick={handleBookPackage}
+              disabled={loading}
+            >
+              {loading ? "Processing..." : "Book Now"}
+            </button>
             </div>
           </div>
         </div>

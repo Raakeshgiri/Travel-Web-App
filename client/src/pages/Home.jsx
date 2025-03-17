@@ -81,17 +81,17 @@ const Home = () => {
     <div className="main w-full">
       <div className="w-full flex flex-col">
         <div className="backaground_image w-full"></div>
-        <div className="top-part w-full gap-2 flex flex-col">
-          <h1 className="text-white text-4xl text-center font-bold underline mb-2">
+        <div className="top-part w-full gap-2 h-screen bg-black/30 flex flex-col">
+          {/* <h1 className="text-white text-4xl text-center font-bold underline mb-2">
             The Travel Index[0]
-          </h1>
-          <h1 className="text-white text-sm text-center xsm:text-lg font-semibold">
+          </h1> */}
+          <h1 className="text-white text-4xl w-1/2 font-bold text-center ">
             Make Your Travel Dream Come True With Our Amazing Packages
           </h1>
           <div className="w-full flex justify-center items-center gap-2 mt-8">
             <input
               type="text"
-              className="rounded-lg outline-none w-[230px] sm:w-2/5 p-2 border border-black bg-opacity-40 bg-white text-white placeholder:text-white font-semibold"
+              className="rounded-lg outline-none w-[230px] sm:w-2/5 p-2 px-4  bg-white text-white placeholder:text-black font-semibold"
               placeholder="Search"
               value={search}
               onChange={(e) => {
@@ -102,7 +102,7 @@ const Home = () => {
               onClick={() => {
                 navigate(`/search?searchTerm=${search}`);
               }}
-              className="bg-white w-10 h-10 flex justify-center items-center text-xl font-semibold rounded-full hover:scale-95"
+              className="bg-[#1e8eff] text-white w-16 h-10 flex justify-center items-center text-xl font-semibold rounded-lg hover:scale-95"
             >
               Go
               {/* <FaSearch className="" /> */}
@@ -113,7 +113,7 @@ const Home = () => {
               onClick={() => {
                 navigate("/search?offer=true");
               }}
-              className="flex items-center justify-around gap-x-1 bg-slate-400 text-white p-2 py-1 text-[8px] xxsm:text-sm sm:text-lg border-e border-white rounded-s-full flex-1 hover:scale-105 transition-all duration-150"
+              className="flex items-center justify-around gap-x-1 bg-[#1e8eff] text-white p-3 py-2 text-[8px] xxsm:text-sm sm:text-lg border-e border-[#1e8eff] rounded-s-full flex-1 hover:scale-105 transition-all duration-150"
             >
               Best Offers
               <LuBadgePercent className="text-2xl" />
@@ -122,7 +122,7 @@ const Home = () => {
               onClick={() => {
                 navigate("/search?sort=packageRating");
               }}
-              className="flex items-center justify-around gap-x-1 bg-slate-400 text-white p-2 py-1 text-[8px] xxsm:text-sm sm:text-lg border-x border-white flex-1 hover:scale-105 transition-all duration-150"
+              className="flex items-center justify-around gap-x-1 bg-[#1e8eff] text-white p-2 py-1 text-[8px] xxsm:text-sm sm:text-lg border-x border-white flex-1 hover:scale-105 transition-all duration-150"
             >
               Top Rated
               <FaStar className="text-2xl" />
@@ -131,7 +131,7 @@ const Home = () => {
               onClick={() => {
                 navigate("/search?sort=createdAt");
               }}
-              className="flex items-center justify-around gap-x-1 bg-slate-400 text-white p-2 py-1 text-[8px] xxsm:text-sm sm:text-lg border-x border-white flex-1 hover:scale-105 transition-all duration-150"
+              className="flex items-center justify-around gap-x-1 bg-[#1e8eff] text-white p-2 py-1 text-[8px] xxsm:text-sm sm:text-lg border-x border-white flex-1 hover:scale-105 transition-all duration-150"
             >
               Latest
               <FaCalendar className="text-lg" />
@@ -140,7 +140,7 @@ const Home = () => {
               onClick={() => {
                 navigate("/search?sort=packageTotalRatings");
               }}
-              className="flex items-center justify-around gap-x-1 bg-slate-400 text-white p-2 py-1 text-[8px] xxsm:text-sm sm:text-lg border-s border-white rounded-e-full flex-1 hover:scale-105 transition-all duration-150"
+              className="flex items-center justify-around gap-x-1 bg-[#1e8eff] text-white p-3 py-2 text-[8px] xxsm:text-sm sm:text-lg border-s border-white rounded-e-full flex-1 hover:scale-105 transition-all duration-150"
             >
               Most Rated
               <FaRankingStar className="text-2xl" />

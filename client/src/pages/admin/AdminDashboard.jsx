@@ -254,13 +254,13 @@ const AdminDashboard = () => {
           {/* ---------------------------------------------------------------------------------------- */}
           <div className="w-[65%] max-sm:w-full">
             <div className="main-div">
-              <nav className="w-full border-blue-500 border-b-4 overflow-x-auto navbar">
+              <nav className="w-full p-5 overflow-x-auto navbar">
                 <div className="w-full flex gap-2">
                   <button
                     className={
                       activePanelId === 1
-                        ? "p-1 rounded-t transition-all duration-300 text-nowrap bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300 text-nowrap"
+                        ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
+                        : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
                     id="bookings"
                     onClick={() => setActivePanelId(1)}
@@ -270,8 +270,8 @@ const AdminDashboard = () => {
                   <button
                     className={
                       activePanelId === 2
-                        ? "p-1 rounded-t transition-all duration-300 text-nowrap bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300 text-nowrap"
+                        ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
+                        : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
                     id="bookings"
                     onClick={() => setActivePanelId(2)}
@@ -281,8 +281,8 @@ const AdminDashboard = () => {
                   <button
                     className={
                       activePanelId === 3
-                        ? "p-1 rounded-t transition-all duration-300 text-nowrap bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300 text-nowrap"
+                        ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
+                        : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
                     id="bookings"
                     onClick={() => setActivePanelId(3)}
@@ -292,8 +292,8 @@ const AdminDashboard = () => {
                   <button
                     className={
                       activePanelId === 4
-                        ? "p-1 rounded-t transition-all duration-300 text-nowrap bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300 text-nowrap"
+                        ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
+                        : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
                     id="bookings"
                     onClick={() => setActivePanelId(4)}
@@ -303,8 +303,8 @@ const AdminDashboard = () => {
                   <button
                     className={
                       activePanelId === 5
-                        ? "p-1 rounded-t transition-all duration-300 text-nowrap bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300 text-nowrap"
+                        ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
+                        : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
                     id="bookings"
                     onClick={() => setActivePanelId(5)}
@@ -314,8 +314,8 @@ const AdminDashboard = () => {
                   <button
                     className={
                       activePanelId === 6
-                        ? "p-1 rounded-t transition-all duration-300 text-nowrap bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300 text-nowrap"
+                        ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
+                        : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
                     id="bookings"
                     onClick={() => setActivePanelId(6)}
@@ -325,8 +325,8 @@ const AdminDashboard = () => {
                   <button
                     className={
                       activePanelId === 7
-                        ? "p-1 rounded-t transition-all duration-300 text-nowrap bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300 text-nowrap"
+                        ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
+                        : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
                     id="bookings"
                     onClick={() => setActivePanelId(7)}
@@ -336,8 +336,8 @@ const AdminDashboard = () => {
                   {/* <button
                     className={
                       activePanelId === 7
-                        ? "p-1 rounded-t transition-all duration-300 text-nowrap bg-blue-500 text-white"
-                        : "p-1 rounded-t transition-all duration-300 text-nowrap"
+                        ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
+                        : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
                     id="updateProfile"
                     onClick={() => setActivePanelId(7)}
@@ -346,7 +346,7 @@ const AdminDashboard = () => {
                   </button> */}
                 </div>
               </nav>
-              <div className="content-div flex flex-wrap">
+              <div className="content-div  flex flex-wrap">
                 {activePanelId === 1 ? (
                   <AllBookings />
                 ) : activePanelId === 2 ? (
