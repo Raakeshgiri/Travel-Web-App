@@ -125,7 +125,7 @@ const Booking = () => {
         key: process.env.RAZORPAY_KEY, // Replace with your Razorpay Key
         amount: data.amount,
         currency: "INR",
-        name: "Travellers",
+        name: "Travel Mate",
         description: "Package Booking",
         order_id: data.order_id, // This comes from Razorpay Order API
         handler: async function (response) {
@@ -300,30 +300,31 @@ const Booking = () => {
                 />
               </div>
               {/* price */}
-              <p className="flex gap-1 text-xl font-semibold my-1">
-                Price:
-                {packageData.packageOffer ? (
-                  <>
-                    <span className="line-through text-gray-700">
-                      ${packageData.packagePrice}
-                    </span>{" "}
-                    -<span>${packageData.packageDiscountPrice}</span>
-                    <span className="text-lg ml-2 bg-green-700 p-1 rounded text-white">
-                      {Math.floor(
-                        ((+packageData.packagePrice -
-                          +packageData.packageDiscountPrice) /
-                          +packageData.packagePrice) *
-                          100
-                      )}
-                      % Off
-                    </span>
-                  </>
-                ) : (
-                  <span className="text-green-700">
-                    ${packageData.packagePrice}
-                  </span>
-                )}
-              </p>
+              <div className="flex flex-col gap-2">
+                <p className="font-semibold">Price:</p>
+                <div className="flex items-center gap-2">
+                  {packageData.packageDiscountPrice ? (
+                    <>
+                      <span className="line-through text-gray-400">
+                        ₹{packageData.packagePrice}
+                      </span>
+                      -<span className="font-semibold text-green-600">₹{packageData.packageDiscountPrice}</span>
+                      <span className="text-sm text-green-600">
+                        (
+                        {Math.round(
+                          ((+packageData.packagePrice -
+                            +packageData.packageDiscountPrice) /
+                            +packageData.packagePrice) *
+                            100
+                        )}
+                        % OFF)
+                      </span>
+                    </>
+                  ) : (
+                    <span className="font-semibold">₹{packageData.packagePrice}</span>
+                  )}
+                </div>
+              </div>
               {/* price */}
               <div className="flex border-2 w-max">
                 <button
@@ -367,15 +368,16 @@ const Booking = () => {
                   +
                 </button>
               </div>
-              <p className="text-xl font-semibold">
-                Total Price:
-                <span className="text-green-700">
-                  $
+              {/* Total Price */}
+              <div className="flex flex-col gap-2">
+                <p className="font-semibold">Total Price:</p>
+                <p className="text-xl font-bold text-green-600">
+                  ₹
                   {packageData.packageDiscountPrice
                     ? packageData.packageDiscountPrice * bookingData.persons
                     : packageData.packagePrice * bookingData.persons}
-                </span>
-              </p>
+                </p>
+              </div>
               {/* <div className="my-2 max-w-[300px] gap-1">
                 <p
                   className={`font-semibold ${

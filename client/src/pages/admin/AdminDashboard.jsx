@@ -28,6 +28,7 @@ import AllUsers from "./AllUsers";
 import Payments from "./Payments";
 import RatingsReviews from "./RatingsReviews";
 import History from "./History";
+import CustomTrips from "./CustomTrips";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -273,7 +274,7 @@ const AdminDashboard = () => {
                         ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
                         : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
-                    id="bookings"
+                    id="addPackages"
                     onClick={() => setActivePanelId(2)}
                   >
                     Add Packages
@@ -284,7 +285,7 @@ const AdminDashboard = () => {
                         ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
                         : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
-                    id="bookings"
+                    id="allPackages"
                     onClick={() => setActivePanelId(3)}
                   >
                     All Packages
@@ -295,7 +296,7 @@ const AdminDashboard = () => {
                         ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
                         : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
-                    id="bookings"
+                    id="users"
                     onClick={() => setActivePanelId(4)}
                   >
                     Users
@@ -306,7 +307,7 @@ const AdminDashboard = () => {
                         ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
                         : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
-                    id="bookings"
+                    id="payments"
                     onClick={() => setActivePanelId(5)}
                   >
                     Payments
@@ -317,7 +318,7 @@ const AdminDashboard = () => {
                         ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
                         : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
-                    id="bookings"
+                    id="ratingsReviews"
                     onClick={() => setActivePanelId(6)}
                   >
                     Ratings/Reviews
@@ -328,25 +329,25 @@ const AdminDashboard = () => {
                         ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
                         : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
-                    id="bookings"
+                    id="history"
                     onClick={() => setActivePanelId(7)}
                   >
                     History
                   </button>
-                  {/* <button
+                  <button
                     className={
-                      activePanelId === 7
+                      activePanelId === 9
                         ? "p-1 rounded transition-all duration-300 text-nowrap bg-blue-500 text-white"
                         : "p-1 rounded transition-all duration-300 text-nowrap"
                     }
-                    id="updateProfile"
-                    onClick={() => setActivePanelId(7)}
+                    id="customTrips"
+                    onClick={() => setActivePanelId(9)}
                   >
-                    Update Profile
-                  </button> */}
+                    Custom Trips
+                  </button>
                 </div>
               </nav>
-              <div className="content-div  flex flex-wrap">
+              <div className="content-div flex flex-wrap">
                 {activePanelId === 1 ? (
                   <AllBookings />
                 ) : activePanelId === 2 ? (
@@ -363,6 +364,8 @@ const AdminDashboard = () => {
                   <History />
                 ) : activePanelId === 8 ? (
                   <AdminUpdateProfile />
+                ) : activePanelId === 9 ? (
+                  <CustomTrips />
                 ) : (
                   <div>Page Not Found!</div>
                 )}

@@ -8,21 +8,42 @@ export default function AdminRoute() {
   const [ok, setOk] = useState(false);
 
   const authCheck = async () => {
-    const res = await fetch("/api/user/admin-auth", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    if (data.check) setOk(true);
-    else setOk(false);
+    try {
+      const res = await fetch("/api/user/admin-auth", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.check) {
+        setOk(true);
+      } else {
+        setOk(false);
+      }
+    } catch (error) {
+      console.error("Admin auth check failed:", error);
+      setOk(false);
+    }
   };
 
   useEffect(() => {
-    if (currentUser !== null) authCheck();
+    if (currentUser) {
+      authCheck();
+    } else {
+      setOk(false);
+    }
   }, [currentUser]);
 
-  return ok ? <Outlet /> : <Spinner />;
+  if (!currentUser) {
+    return <Navigate to="/login" />;
+  }
+
+  if (!ok) {
+    return <Spinner />;
+  }
+
+  return <Outlet />;
 }

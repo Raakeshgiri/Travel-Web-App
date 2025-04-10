@@ -231,27 +231,28 @@ const Package = () => {
               {packageData?.packageName}
             </p>
             {/* price */}
-            <p className="flex gap-1 text-2xl font-semibold my-3">
-              {packageData?.packageOffer ? (
+            <div className="flex items-center gap-2">
+              {packageData?.packageDiscountPrice ? (
                 <>
-                  <span className="line-through text-gray-700">
-                    ${packageData?.packagePrice}
-                  </span>{" "}
-                  -<span>${packageData?.packageDiscountPrice}</span>
-                  <span className="text-lg ml-2 bg-green-700 p-1 rounded text-white">
-                    {Math.floor(
+                  <span className="line-through text-gray-400">
+                    ₹{packageData?.packagePrice}
+                  </span>
+                  -<span className="font-semibold text-green-600">₹{packageData?.packageDiscountPrice}</span>
+                  <span className="text-sm text-green-600">
+                    (
+                    {Math.round(
                       ((+packageData?.packagePrice -
                         +packageData?.packageDiscountPrice) /
                         +packageData?.packagePrice) *
-                        100
+                      100
                     )}
-                    % Off
+                    % OFF)
                   </span>
                 </>
               ) : (
-                <span>${packageData?.packagePrice}</span>
+                <span className="font-semibold">₹{packageData?.packagePrice}</span>
               )}
-            </p>
+            </div>
             {/* price */}
             {/* destination */}
             <p className="text-green-700 flex items-center gap-1 text-lg capitalize">

@@ -49,19 +49,18 @@ const PackageCard = ({ packageData }) => {
               </p>
             )}
             {packageData.offer && packageData.packageDiscountPrice ? (
-              <p className="flex gap-1">
-                <span className="line-through text-gray-700">
-                  ${packageData.packagePrice}
+              <div className="flex items-center gap-2">
+                <span className="line-through text-gray-400">
+                  ₹{packageData.packagePrice}
                 </span>
-                -
-                <span className="font-medium text-green-700">
-                  ${packageData.packageDiscountPrice}
+                <span className="font-semibold">
+                  ₹{packageData.packageDiscountPrice}
                 </span>
-              </p>
+              </div>
             ) : (
-              <p className="font-medium text-green-700">
-                ${packageData.packagePrice}
-              </p>
+              <span className="font-semibold">
+                ₹{packageData.packagePrice}
+              </span>
             )}
           </div>
           {/* price & rating */}

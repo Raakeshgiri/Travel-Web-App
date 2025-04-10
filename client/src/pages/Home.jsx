@@ -79,19 +79,16 @@ const Home = () => {
 
   return (
     <div className="main w-full">
-      <div className="w-full flex flex-col">
+      <div className="w-full h-full flex flex-col">
         <div className="backaground_image w-full"></div>
         <div className="top-part w-full gap-2 h-screen bg-black/30 flex flex-col">
-          {/* <h1 className="text-white text-4xl text-center font-bold underline mb-2">
-            The Travel Index[0]
-          </h1> */}
           <h1 className="text-white text-4xl w-1/2 font-bold text-center ">
             Make Your Travel Dream Come True With Our Amazing Packages
           </h1>
           <div className="w-full flex justify-center items-center gap-2 mt-8">
             <input
               type="text"
-              className="rounded-lg outline-none w-[230px] sm:w-2/5 p-2 px-4  bg-white text-white placeholder:text-black font-semibold"
+              className="rounded-lg outline-none w-[230px] sm:w-2/5 p-2 px-4  bg-white text-black placeholder:text-black font-semibold"
               placeholder="Search"
               value={search}
               onChange={(e) => {
@@ -105,7 +102,6 @@ const Home = () => {
               className="bg-[#1e8eff] text-white w-16 h-10 flex justify-center items-center text-xl font-semibold rounded-lg hover:scale-95"
             >
               Go
-              {/* <FaSearch className="" /> */}
             </button>
           </div>
           <div className="w-[90%] max-w-xl flex justify-center mt-10">

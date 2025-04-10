@@ -14,6 +14,8 @@ import Package from "./pages/Package";
 import RatingsPage from "./pages/RatingsPage";
 import Booking from "./pages/user/Booking";
 import Search from "./pages/Search";
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
 
 const App = () => {
   return (
@@ -24,19 +26,24 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/search" element={<Search />} />
-        {/* user */}
+        
+        {/* User routes */}
         <Route path="/profile" element={<PrivateRoute />}>
           <Route path="user" element={<Profile />} />
         </Route>
-        {/* admin */}
-        <Route path="/profile" element={<AdminRoute />}>
-          <Route path="admin" element={<AdminDashboard />} />
-          <Route path="admin/update-package/:id" element={<UpdatePackage />} />
+        
+        {/* Admin routes */}
+        <Route path="/admin-dashboard" element={<AdminRoute />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="update-package/:id" element={<UpdatePackage />} />
         </Route>
-        <Route path="/about" element={<About />} />
+        
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/package/:id" element={<Package />} />
         <Route path="/package/ratings/:id" element={<RatingsPage />} />
-        {/* checking user auth before booking */}
+        
+        {/* Booking route */}
         <Route path="/booking" element={<PrivateRoute />}>
           <Route path=":packageId" element={<Booking />} />
         </Route>
