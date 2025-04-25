@@ -5,6 +5,13 @@ import { useNavigate, useParams } from "react-router";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 
+// Configure axios with explicit port
+const baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = baseURL;
+axios.defaults.withCredentials = true;
+
+console.log('Axios configured with base URL:', baseURL);
+
 const Booking = () => {
   const { currentUser } = useSelector((state) => state.user);
   const params = useParams();
@@ -92,8 +99,17 @@ const Booking = () => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
       script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
+      
+      script.onload = () => {
+        console.log("Razorpay script loaded successfully");
+        resolve(true);
+      };
+      
+      script.onerror = () => {
+        console.error("Failed to load Razorpay script");
+        resolve(false);
+      };
+      
       document.body.appendChild(script);
     });
   };
@@ -106,62 +122,110 @@ const Booking = () => {
   
     try {
       setLoading(true);
+      console.log("Starting payment process...");
   
-      // Load Razorpay script before proceeding
+      // Load Razorpay script
+      console.log("Loading Razorpay script...");
       const loaded = await loadRazorpay();
       if (!loaded) {
         alert("Razorpay SDK failed to load. Are you online?");
         setLoading(false);
         return;
       }
+      console.log("Razorpay script loaded successfully");
   
-      // Create an order on the backend
-      const { data } = await axios.post("/api/booking/create-order", {
-        amount: bookingData.totalPrice * 100, // Amount in paise
-        currency: "INR",
+      // Create order
+      console.log("Creating order with amount:", bookingData.totalPrice);
+      const orderResponse = await axios.post("/api/booking/create-order", {
+        amount: bookingData.totalPrice
       });
+      
+      console.log("Full order response:", orderResponse);
+      console.log("Order response data:", orderResponse.data);
+
+      if (!orderResponse.data?.success) {
+        console.error("Order creation failed:", orderResponse.data);
+        alert(orderResponse.data?.message || "Could not create order");
+        setLoading(false);
+        return;
+      }
   
       const options = {
-        key: process.env.RAZORPAY_KEY, // Replace with your Razorpay Key
-        amount: data.amount,
+        key: "rzp_test_5LlH6brMb1ZEZm",
+        amount: bookingData.totalPrice * 100, // Amount in paise
         currency: "INR",
         name: "Travel Mate",
-        description: "Package Booking",
-        order_id: data.order_id, // This comes from Razorpay Order API
+        description: `Booking for ${packageData.packageName}`,
+        order_id: orderResponse.data.orderId,
         handler: async function (response) {
-          // Verify payment on backend
-          const verifyRes = await axios.post("/api/booking/verify-payment", {
-            order_id: data.order_id,
-            payment_id: response.razorpay_payment_id,
-            signature: response.razorpay_signature,
-          });
-  
-          // if (verifyRes.data.success) {
-            // Save booking details in DB
-            await axios.post(`/api/booking/book-package/${params?.packageId}`, bookingData);
-            alert("Booking successful!");
-            navigate(`/profile/${currentUser?.user_role === 1 ? "admin" : "user"}`);
-          // } 
-          // else {
-          //   alert("Payment verification failed.");
-          // }
+          console.log("Payment successful, verifying...", response);
+          try {
+            // Verify payment
+            const verifyResponse = await axios.post("/api/booking/verify-payment", {
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature
+            });
+            console.log("Verification response:", verifyResponse.data);
+
+            if (verifyResponse.data?.success) {
+              console.log("Payment verified, creating booking...");
+              // Create booking
+              const bookingResponse = await axios.post(
+                `/api/booking/book-package/${params?.packageId}`, 
+                bookingData
+              );
+              console.log("Booking response:", bookingResponse.data);
+
+              if (bookingResponse.data?.success) {
+                alert("Booking successful!");
+                navigate("/profile");
+              } else {
+                alert(bookingResponse.data?.message || "Booking failed");
+              }
+            } else {
+              alert("Payment verification failed");
+            }
+          } catch (error) {
+            console.error("Payment verification error:", error);
+            alert("Payment verification failed");
+          }
         },
         prefill: {
           name: currentUser.username,
           email: currentUser.email,
-          contact: currentUser.phone,
+          contact: currentUser.phone
+        },
+        notes: {
+          packageId: params?.packageId,
+          persons: bookingData.persons,
+          date: bookingData.date
         },
         theme: {
-          color: "#3399cc",
+          color: "#3399cc"
         },
+        modal: {
+          ondismiss: function() {
+            console.log("Payment modal closed");
+            setLoading(false);
+          }
+        }
       };
   
-      const razor = new window.Razorpay(options);
-      razor.open();
-  
-      setLoading(false);
+      console.log("Initializing Razorpay with options:", options);
+      const razorpayInstance = new window.Razorpay(options);
+      console.log("Opening Razorpay modal...");
+      razorpayInstance.open();
+      
     } catch (error) {
-      console.log(error);
+      console.error("Payment error:", error);
+      if (error.response) {
+        console.error("Full error response:", error.response);
+        alert(error.response.data?.message || "Payment failed");
+      } else {
+        alert("Payment failed: " + error.message);
+      }
+    } finally {
       setLoading(false);
     }
   };

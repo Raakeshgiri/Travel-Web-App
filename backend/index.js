@@ -29,6 +29,12 @@ mongoose
   })
   .catch((err) => console.log(err));
 
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 app.use(
   cors({
     origin: [process.env.SERVER_URL, "http://localhost:5173", "http://localhost:5174"],
@@ -38,6 +44,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+// API Routes
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/package", packageRoute);
@@ -47,16 +54,24 @@ app.use("/api/chatbot", chatbotRoute);
 app.use("/api/customTrip", customTripRoute);
 app.use('/api/contact', contactRouter);
 
+// API 404 handler
+app.use('/api/*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'API endpoint not found'
+  });
+});
+
+// Production static files
 if (process.env.NODE_ENV_CUSTOM === "production") {
-  //static files
   app.use(express.static(path.join(__dirname, "/client/dist")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
   });
 } else {
-  // //rest api
-  app.use("/", (req, res) => {
+  // Development welcome route - only for non-API routes
+  app.get("/", (req, res) => {
     res.send("Welcome to travel and tourism app");
   });
 }
@@ -64,4 +79,5 @@ if (process.env.NODE_ENV_CUSTOM === "production") {
 //port
 app.listen(8000, () => {
   console.log("listening on 8000");
+  console.log("API routes initialized at /api/*");
 });

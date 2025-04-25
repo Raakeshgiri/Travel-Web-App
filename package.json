@@ -11,7 +11,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
     "nodemailer": "^6.10.0",
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "razorpay": "^2.9.6"
   },
   "name": "travel-and-tourism-management-system",
   "version": "1.0.0",

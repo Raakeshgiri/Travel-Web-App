@@ -1,6 +1,84 @@
 import Booking from "../models/booking.model.js";
 import Package from "../models/package.model.js";
 import { ObjectId } from "mongodb";
+import Razorpay from "razorpay";
+import crypto from "crypto";
+
+// Initialize Razorpay
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY || "rzp_test_7qBV4Q0u3dqJ57",
+  key_secret: process.env.RAZORPAY_SECRET
+});
+
+// Create Razorpay order
+export const createOrder = async (req, res) => {
+  try {
+    const { amount } = req.body;
+    
+    if (!amount) {
+      return res.status(400).json({
+        success: false,
+        message: "Amount is required"
+      });
+    }
+
+    console.log("Creating order for amount:", amount);
+    
+    const options = {
+      amount: Math.round(amount * 100), // Convert to paise and ensure it's an integer
+      currency: "INR",
+      receipt: "order_" + Date.now(),
+    };
+
+    console.log("Order options:", options);
+
+    const order = await razorpay.orders.create(options);
+    console.log("Order created:", order);
+
+    res.status(200).json({
+      success: true,
+      orderId: order.id,
+      amount: order.amount,
+    });
+  } catch (error) {
+    console.error("Order creation error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message || "Failed to create order"
+    });
+  }
+};
+
+// Verify Razorpay payment
+export const verifyPayment = async (req, res) => {
+  try {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    
+    const sign = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSign = crypto
+      .createHmac("sha256", process.env.RAZORPAY_SECRET)
+      .update(sign.toString())
+      .digest("hex");
+
+    if (razorpay_signature === expectedSign) {
+      res.status(200).json({
+        success: true,
+        message: "Payment verified successfully"
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Invalid signature"
+      });
+    }
+  } catch (error) {
+    console.error("Payment verification error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Payment verification failed"
+    });
+  }
+};
 
 //book package
 export const bookPackage = async (req, res) => {

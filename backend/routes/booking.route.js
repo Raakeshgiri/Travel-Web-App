@@ -2,15 +2,30 @@ import express, { Router } from "express";
 import {
   bookPackage,
   cancelBooking,
+  createOrder,
   deleteBookingHistory,
   getAllBookings,
   getAllUserBookings,
   getCurrentBookings,
   getUserCurrentBookings,
+  verifyPayment,
 } from "../controllers/booking.controller.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
+
+// Debug middleware
+router.use((req, res, next) => {
+  console.log(`Booking Route - ${req.method} ${req.path}`);
+  next();
+});
+
+// Razorpay routes
+router.post("/create-order", requireSignIn, (req, res, next) => {
+  console.log("Create Order Route Hit - Body:", req.body);
+  createOrder(req, res, next);
+});
+router.post("/verify-payment", requireSignIn, verifyPayment);
 
 // book package
 router.post("/book-package/:packageId", requireSignIn, bookPackage);
