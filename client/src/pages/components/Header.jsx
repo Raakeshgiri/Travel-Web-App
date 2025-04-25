@@ -82,7 +82,7 @@ const Header = () => {
             <div className="flex items-center space-x-4">
               {currentUser ? (
                 <Link
-                  to={currentUser.user_role === 1 ? "/admin-dashboard" : "/profile"}
+                  to={currentUser.user_role === 1 ? "/admin-dashboard" : "/profile/user"}
                   className="flex items-center space-x-2 hover:text-blue-400 transition duration-300"
                 >
                   <FaUser className="text-xl" />

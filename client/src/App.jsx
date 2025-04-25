@@ -29,6 +29,7 @@ const App = () => {
         
         {/* User routes */}
         <Route path="/profile" element={<PrivateRoute />}>
+          <Route index element={<Profile />} />
           <Route path="user" element={<Profile />} />
         </Route>
         

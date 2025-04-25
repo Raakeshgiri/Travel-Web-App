@@ -6,24 +6,41 @@ import Spinner from "../components/Spinner";
 export default function PrivateRoute() {
   const { currentUser } = useSelector((state) => state.user);
   const [ok, setOk] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const authCheck = async () => {
-    const res = await fetch("/api/user/user-auth", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-    const data = await res.json();
-    if (data.check) setOk(true);
-    else setOk(false);
+    try {
+      const res = await fetch("/api/user/user-auth", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.check) {
+        setOk(true);
+      } else {
+        setOk(false);
+      }
+    } catch (error) {
+      console.error("Auth check failed:", error);
+      setOk(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    if (currentUser !== null) authCheck();
+    if (currentUser !== null) {
+      authCheck();
+    } else {
+      setLoading(false);
+      setOk(false);
+    }
   }, [currentUser]);
 
-  return ok ? <Outlet /> : <Spinner />;
+  if (loading) return <Spinner />;
+  return ok ? <Outlet /> : <Navigate to="/login" />;
 }
