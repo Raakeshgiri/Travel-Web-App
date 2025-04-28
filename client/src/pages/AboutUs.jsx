@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaHeart, FaMapMarkedAlt, FaUserFriends, FaRegLightbulb } from 'react-icons/fa';
-
+import Raakesh from '../assets/images/Raakesh.jpg';
+import Dinesh from '../assets/images/Dinesh.jpg';
+import Jebas from '../assets/images/Jebas.jpg';
 const AboutUs = () => {
   return (
     <div className="min-h-screen bg-white">
@@ -90,38 +92,35 @@ const AboutUs = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
               <img 
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3" 
+                src={Raakesh}
                 alt="Team member" 
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">John Doe</h3>
+                <h3 className="text-xl font-semibold mb-2">Raakesh</h3>
                 <p className="text-blue-600 mb-2">Founder & CEO</p>
-                <p className="text-gray-600">20+ years of experience in travel industry</p>
               </div>
             </div>
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
               <img 
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3" 
+                src={Dinesh} 
                 alt="Team member" 
-                className="w-full h-64 object-cover"
+                className="w-full h-64 object-cover center "
               />
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Jane Smith</h3>
+                <h3 className="text-xl font-semibold mb-2">Dinesh</h3>
                 <p className="text-blue-600 mb-2">Travel Expert</p>
-                <p className="text-gray-600">Specialist in luxury travel experiences</p>
               </div>
             </div>
             <div className="bg-white rounded-lg overflow-hidden shadow-md">
               <img 
-                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3" 
+                src={Jebas} 
                 alt="Team member" 
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Mike Johnson</h3>
+                <h3 className="text-xl font-semibold mb-2">Jebas</h3>
                 <p className="text-blue-600 mb-2">Customer Experience</p>
-                <p className="text-gray-600">Making your journey smooth and memorable</p>
               </div>
             </div>
           </div>
