@@ -152,7 +152,14 @@ const CustomizationModal = ({ isOpen, onClose }) => {
 
   // Extract basic information from user input (fallback if AI extraction fails)
   const extractDestination = (text) => {
-    const destinations = ["paris", "bali", "tokyo", "new york", "rome", "london", "dubai"];
+    const destinations = [
+      "delhi", "mumbai", "bangalore", "hyderabad", "chennai", 
+      "kolkata", "ahmedabad", "pune", "jaipur", "udaipur", 
+      "jodhpur", "goa", "kerala", "varanasi", "agra", 
+      "amritsar", "shimla", "manali", "darjeeling", "ooty",
+      "munnar", "alleppey", "kodaikanal", "mahabalipuram", "hampi",
+      "mysore", "kochi", "kanyakumari", "gangtok", "leh"
+    ];
     text = text.toLowerCase();
     
     for (const city of destinations) {

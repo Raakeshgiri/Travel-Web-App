@@ -29,7 +29,7 @@ export default function Chart({ data }) {
                       className="bg-slate-400 text-white py-2 px-4 rounded-md shadow-lg"
                       key={item.payload.date}
                     >
-                      <p>Price: ${item.value}</p>
+                      <p>Price: ₹{item.value}</p>
                       <p>Date: {item.payload.date}</p>
                     </div>
                   );

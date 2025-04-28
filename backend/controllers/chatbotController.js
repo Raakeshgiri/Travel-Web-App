@@ -51,10 +51,18 @@ function extractTravelInfo(userPrompt) {
   
   // Extract destination (simple approach)
   const commonDestinations = [
-    'paris', 'london', 'tokyo', 'new york', 'bali', 'rome', 'barcelona',
-    'dubai', 'sydney', 'bangkok', 'singapore', 'hong kong', 'las vegas',
-    'amsterdam', 'istanbul', 'miami', 'seoul', 'venice', 'san francisco',
-    'india', 'japan', 'usa', 'uk', 'france', 'italy', 'spain', 'australia'
+    // Major Cities
+    'delhi', 'mumbai', 'bangalore', 'hyderabad', 'chennai', 
+    'kolkata', 'ahmedabad', 'pune', 'jaipur', 'udaipur', 
+    'jodhpur', 'goa', 'kerala', 'varanasi', 'agra', 
+    'amritsar', 'shimla', 'manali', 'darjeeling', 'ooty',
+    'munnar', 'alleppey', 'kodaikanal', 'mahabalipuram', 'hampi',
+    'mysore', 'kochi', 'kanyakumari', 'gangtok', 'leh',
+    // States/Regions
+    'rajasthan', 'kerala', 'goa', 'himachal pradesh', 'uttarakhand',
+    'tamil nadu', 'karnataka', 'maharashtra', 'gujarat', 'punjab',
+    'west bengal', 'sikkim', 'ladakh', 'andaman and nicobar',
+    'lakshadweep', 'kashmir'
   ];
   
   commonDestinations.forEach(dest => {

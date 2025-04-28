@@ -73,7 +73,7 @@ const Payments = () => {
                 <p>{booking?.buyer?.username}</p>
                 <p>{booking?.buyer?.email}</p>
                 <p>{booking?.date}</p>
-                <p>${booking?.totalPrice}</p>
+                <p>₹{booking?.totalPrice}</p>
               </div>
             );
           })}

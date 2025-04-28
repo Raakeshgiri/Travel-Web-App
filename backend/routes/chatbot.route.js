@@ -168,20 +168,18 @@ function extractTravelInfo(userPrompt) {
   
   // Enhanced destination list with more locations and variations
   const commonDestinations = [
-    // Europe
-    'paris', 'london', 'rome', 'barcelona', 'amsterdam', 'venice', 'prague', 'dubrovnik',
-    'santorini', 'ibiza', 'milan', 'vienna', 'berlin', 'dublin', 'edinburgh', 'lisbon',
-    // Asia
-    'tokyo', 'bangkok', 'bali', 'singapore', 'hong kong', 'seoul', 'kyoto', 'taipei',
-    'shanghai', 'beijing', 'mumbai', 'dubai', 'abu dhabi', 'istanbul', 'jerusalem',
-    // Americas
-    'new york', 'las vegas', 'miami', 'san francisco', 'vancouver', 'rio de janeiro',
-    'buenos aires', 'mexico city', 'cancun', 'havana', 'santiago', 'lima',
-    // Oceania
-    'sydney', 'melbourne', 'auckland', 'queenstown', 'gold coast', 'cairns',
-    // Countries
-    'france', 'italy', 'spain', 'germany', 'japan', 'thailand', 'india', 'china',
-    'usa', 'uk', 'australia', 'new zealand', 'brazil', 'mexico', 'greece'
+    // Major Cities
+    'delhi', 'mumbai', 'bangalore', 'hyderabad', 'chennai', 
+    'kolkata', 'ahmedabad', 'pune', 'jaipur', 'udaipur', 
+    'jodhpur', 'goa', 'kerala', 'varanasi', 'agra', 
+    'amritsar', 'shimla', 'manali', 'darjeeling', 'ooty',
+    'munnar', 'alleppey', 'kodaikanal', 'mahabalipuram', 'hampi',
+    'mysore', 'kochi', 'kanyakumari', 'gangtok', 'leh',
+    // States/Regions
+    'rajasthan', 'kerala', 'goa', 'himachal pradesh', 'uttarakhand',
+    'tamil nadu', 'karnataka', 'maharashtra', 'gujarat', 'punjab',
+    'west bengal', 'sikkim', 'ladakh', 'andaman and nicobar',
+    'lakshadweep', 'kashmir'
   ];
   
   // Extract destination with better matching

@@ -165,7 +165,7 @@ const AllPackages = () => {
                   </p>
                 </Link>
                 <div className="flex flex-col">
-                  <Link to={`/profile/admin/update-package/${pack._id}`}>
+                  <Link to={`/admin-dashboard/update-package/${pack._id}`}>
                     <button
                       disabled={loading}
                       className="text-blue-600 hover:underline"
